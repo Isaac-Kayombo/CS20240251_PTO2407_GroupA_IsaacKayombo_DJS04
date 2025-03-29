@@ -22,6 +22,16 @@ function renderBookPreview(book) {
     return element;
 }
 
+// FUNCTION TO RENDER A LIST OF BOOKS
+function renderBookList(bookArray) {
+    const fragment = document.createDocumentFragment();
+    for (const { autthor, id, image, title } of bookArray.slice(0, BOOKS_PER_PAGE)) {
+        fragment.appendChild(renderBookPreview({ author, id, image, title }));
+    }
+    document.querySelector('[data-list-items]').appendChild(fragment);
+}
+
+
 const genreHtml = document.createDocumentFragment()
 const firstGenreElement = document.createElement('option')
 firstGenreElement.value = 'any'
