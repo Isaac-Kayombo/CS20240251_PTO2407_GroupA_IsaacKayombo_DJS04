@@ -207,3 +207,24 @@ function setupEventListeners() {
     });
 }
 
+// FUNCTION TO INITIALIZE THE APP
+function initApp() {
+    // Render books
+    renderBookList(books);
+
+    // Render genre and author dropdowns
+    renderGenres();
+    renderAuthors();
+
+    // Theme handler
+    handleTheme();
+    
+    //Setup event listeners
+    setupEventListeners();
+
+    // Show more button
+    updateShowMoreButton();
+}
+
+// RUN APP
+initApp();
