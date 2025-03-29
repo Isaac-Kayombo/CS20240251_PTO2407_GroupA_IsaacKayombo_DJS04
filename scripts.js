@@ -92,6 +92,33 @@ function updateShowMoreButton() {
     showMoreButton.disabled = remainingBooks <= 0;
 }
 
+// FUNCTION TO HANDLE SEARCH FILTERS
+function applySearchFilters(filters) {
+    const result = books.filter(book => {
+        let genreMatch = filters.genre === 'any' || book.genres.includes(filters.genre);
+        let titleMatch = filters.title.trim() === '' || book.title.toLowerCase().includes(filters.title.toLowerCase());
+        let authorMatch = filters.author === 'any' || book.author === filters.author;
+        return titleMatch && authorMatch && genreMatch;
+    });
+
+    page = 1;
+    matches = result;
+
+    const listMessage = document.querySelector('[data-list-message]');
+    if (result.length < 1) {
+        listMessage.classList.add('list__message_show');
+    } else {
+        listMessage.classList.remove('list__message_show');
+    }
+
+    document.querySelector('[data-list-items]').innerHTML = '';
+    renderBookList(result);
+
+    updateShowMoreButton();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.querySelector('[data-search-overlay]').open = false;
+}
+
 
 document.querySelector('[data-search-cancel]').addEventListener('click', () => {
     document.querySelector('[data-search-overlay]').open = false
