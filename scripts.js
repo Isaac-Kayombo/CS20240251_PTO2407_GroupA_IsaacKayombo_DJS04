@@ -25,7 +25,7 @@ function renderBookPreview(book) {
 // FUNCTION TO RENDER A LIST OF BOOKS
 function renderBookList(bookArray) {
     const fragment = document.createDocumentFragment();
-    for (const { autthor, id, image, title } of bookArray.slice(0, BOOKS_PER_PAGE)) {
+    for (const { author, id, image, title } of bookArray.slice(0, BOOKS_PER_PAGE)) {
         fragment.appendChild(renderBookPreview({ author, id, image, title }));
     }
     document.querySelector('[data-list-items]').appendChild(fragment);
@@ -71,11 +71,10 @@ function renderAuthors() {
 function handleTheme() {
     const themeSetting = document.querySelector('[data-setting-theme]');
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        themeSetting.value = 'night'
+        themeSetting.value = 'night';
         document.documentElement.style.setProperty('--color-dark', '255, 255, 255');
         document.documentElement.style.setProperty('--color-light', '10, 10, 20');
     } else {
-        themeSetting.value = 'day'
         document.documentElement.style.setProperty('--color-dark', '10, 10, 20');
         document.documentElement.style.setProperty('--color-light', '255, 255, 255');
     }
