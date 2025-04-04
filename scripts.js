@@ -10,7 +10,6 @@ function renderBookPreview(book) {
     const element = document.createElement("button");
     element.classList = "preview";
     element.setAttribute("data-preview", book.id);
-
     element.innerHTML = `
         <img class="preview__image" src="${book.image}" />
         <div class="preview__info">
@@ -18,7 +17,6 @@ function renderBookPreview(book) {
             <div class="preview__author">${authors[book.author]}</div>
         </div>
     `;
-
     return element;
 }
 
@@ -31,40 +29,25 @@ function renderBookList(bookArray) {
     document.querySelector('[data-list-items]').appendChild(fragment);
 }
 
-// FUNCTION TO RENDER GENRES 
-function renderGenres() {
-    const genreHtml = document.createDocumentFragment();
-    const firstGenreElement = document.createElement('option');
-    firstGenreElement.value = 'any';
-    firstGenreElement.innerText = 'All Genres';
-    genreHtml.appendChild(firstGenreElement);
+// GENERALIZED FUNCTION TO RENDER DROPDOWN
+function renderDropdown(options, containerSelector, firstOptionText) {
+    const dropdownHtml = document.createDocumentFragment();
 
-    for (const [id, name] of Object.entries(genres)) {
-        const element = document.createElement('option');
-        element.value = id;
-        element.innerText = name;
-        genreHtml.appendChild(element);
+    // Create and appends first option
+    const firstOption = document.createElement('option');
+    firstOption.value = 'any';
+    firstOption.innerText = firstOptionText;
+    dropdownHtml.appendChild(firstOption);
+    
+    // Loops through the options and appends them
+    for (const [id, name] of Object.entries(options)) {
+        const optionElement = document.createElement('option');
+        optionElement.value = id;
+        optionElement.innerText = name;
+        dropdownHtml.appendChild(optionElement);
     }
-
-    document.querySelector('[data-search-genres]').appendChild(genreHtml);
-}
-
-// FUNCTION TO RENDER AUTHORS DROPDOWN
-function renderAuthors() {
-    const authorsHtml = document.createDocumentFragment();
-    const firstAuthorElement = document.createElement('option');
-    firstAuthorElement.value = 'any';
-    firstAuthorElement.innerText = 'All Authors';
-    authorsHtml.appendChild(firstAuthorElement);
-
-    for (const [id, name] of Object.entries(authors)) {
-        const element = document.createElement('option');
-        element.value = id;
-        element.innerText = name;
-        authorsHtml.appendChild(element);
-    }
-
-    document.querySelector('[data-search-authors]').appendChild(authorsHtml);
+    // Appends dropdown to target container
+    document.querySelector(containerSelector).appendChild(dropdownHtml);
 }
 
 // FUNCTION TO HANDLE THEME SETTING BASED ON USER SELECTION
