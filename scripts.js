@@ -50,15 +50,6 @@ function renderDropdown(options, containerSelector, firstOptionText) {
     document.querySelector(containerSelector).appendChild(dropdownHtml);
 }
 
-// FUNCTION TO HANDLE THEME SETTING BASED ON USER SELECTION
-function handleTheme() {
-    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const themeSetting = document.querySelector('[data-setting-theme]');
-    themeSetting.value = isDarkMode ? 'night' : 'day';
-    document.documentElement.style.setProperty('--color-dark', isDarkMode ? '255, 255, 255' : '10, 10, 20');
-    document.documentElement.style.setProperty('--color-light', isDarkMode ? '10, 10, 20' : '255, 255, 255');
-}
-
 // FUNCTION TO UPDATE THE "SHOW MORE" BUTTON TEXT AND STATUS
 function updateShowMoreButton() {
     const remainingBooks = matches.length -(page * BOOKS_PER_PAGE);
@@ -187,9 +178,6 @@ function initApp() {
     // Rendering genre and author dropdowns
     renderDropdown(genres, '[data-search-genres]','All Genres');
     renderDropdown(authors, '[data-search-authors]', 'All Authors');
-
-    // Theme handler
-    handleTheme();
     
     //Setup event listeners
     setupEventListeners();
