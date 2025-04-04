@@ -72,22 +72,16 @@ function updateShowMoreButton() {
 
 // FUNCTION TO HANDLE SEARCH FILTERS
 function applySearchFilters(filters) {
-    const result = books.filter(book => {
-        let genreMatch = filters.genre === 'any' || book.genres.includes(filters.genre);
-        let titleMatch = filters.title.trim() === '' || book.title.toLowerCase().includes(filters.title.toLowerCase());
-        let authorMatch = filters.author === 'any' || book.author === filters.author;
-        return titleMatch && authorMatch && genreMatch;
-    });
+    const result = books.filter(book => 
+        (filters.genre === 'any' || book.genres.includes(filters.genre)) &&
+        (filters.title.trim() === '' || book.title.toLowerCase().includes(filters.title.toLowerCase())) &&
+        (filters.author === 'any' || book.author === filters.author)
+    );
 
     page = 1;
     matches = result;
-
     const listMessage = document.querySelector('[data-list-message]');
-    if (result.length < 1) {
-        listMessage.classList.add('list__message_show');
-    } else {
-        listMessage.classList.remove('list__message_show');
-    }
+    listMessage.classList.toggle('list__message_show',result.lenght < 1)
 
     document.querySelector('[data-list-items]').innerHTML = '';
     renderBookList(result);
@@ -203,6 +197,5 @@ function initApp() {
     // Show more button
     updateShowMoreButton();
 }
-
 // RUN APP
 initApp();
