@@ -194,9 +194,9 @@ function initApp() {
     // Render books
     renderBookList(books);
 
-    // Render genre and author dropdowns
-    renderGenres();
-    renderAuthors();
+    // Rendering genre and author dropdowns
+    renderDropdown(genres, '[data-search-genres]','All Genres');
+    renderDropdown(authors, '[data-search-authors]', 'All Authors');
 
     // Theme handler
     handleTheme();
