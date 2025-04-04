@@ -52,15 +52,11 @@ function renderDropdown(options, containerSelector, firstOptionText) {
 
 // FUNCTION TO HANDLE THEME SETTING BASED ON USER SELECTION
 function handleTheme() {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const themeSetting = document.querySelector('[data-setting-theme]');
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        themeSetting.value = 'night';
-        document.documentElement.style.setProperty('--color-dark', '255, 255, 255');
-        document.documentElement.style.setProperty('--color-light', '10, 10, 20');
-    } else {
-        document.documentElement.style.setProperty('--color-dark', '10, 10, 20');
-        document.documentElement.style.setProperty('--color-light', '255, 255, 255');
-    }
+    themeSetting.value = isDarkMode ? 'night' : 'day';
+    document.documentElement.style.setProperty('--color-dark', isDarkMode ? '255, 255, 255' : '10, 10, 20');
+    document.documentElement.style.setProperty('--color-light', isDarkMode ? '10, 10, 20' : '255, 255, 255');
 }
 
 // FUNCTION TO UPDATE THE "SHOW MORE" BUTTON TEXT AND STATUS
